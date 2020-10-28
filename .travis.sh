@@ -2,6 +2,7 @@
 
 ruby_v=$(ruby -v)
 
+if [[ $ruby_v =~ '2.2.' ]] || [[ $ruby_v =~ '2.3.' ]]; then
 ACTIVERECORD_VERSION='3.2' bundle update
 ACTIVERECORD_VERSION='3.2' ENABLE_TRANSITIONS='true' bundle exec rake test
 ACTIVERECORD_VERSION='3.2' ENABLE_TRANSITIONS='false' bundle exec rake test
@@ -17,16 +18,17 @@ ACTIVERECORD_VERSION='4.1' ENABLE_TRANSITIONS='false' bundle exec rake test
 ACTIVERECORD_VERSION='4.2' bundle update
 ACTIVERECORD_VERSION='4.2' ENABLE_TRANSITIONS='true' bundle exec rake test
 ACTIVERECORD_VERSION='4.2' ENABLE_TRANSITIONS='false' bundle exec rake test
-
-ACTIVERECORD_VERSION='5.0' bundle update
-ACTIVERECORD_VERSION='5.0' ENABLE_TRANSITIONS='true' bundle exec rake test
-ACTIVERECORD_VERSION='5.0' ENABLE_TRANSITIONS='false' bundle exec rake test
-
-ACTIVERECORD_VERSION='5.1' bundle update
-ACTIVERECORD_VERSION='5.1' ENABLE_TRANSITIONS='true' bundle exec rake test
-ACTIVERECORD_VERSION='5.1' ENABLE_TRANSITIONS='false' bundle exec rake test
+fi
 
 if [[ ! $ruby_v =~ '2.2.0' ]]; then
+  ACTIVERECORD_VERSION='5.0' bundle update
+  ACTIVERECORD_VERSION='5.0' ENABLE_TRANSITIONS='true' bundle exec rake test
+  ACTIVERECORD_VERSION='5.0' ENABLE_TRANSITIONS='false' bundle exec rake test
+
+  ACTIVERECORD_VERSION='5.1' bundle update
+  ACTIVERECORD_VERSION='5.1' ENABLE_TRANSITIONS='true' bundle exec rake test
+  ACTIVERECORD_VERSION='5.1' ENABLE_TRANSITIONS='false' bundle exec rake test
+
   ACTIVERECORD_VERSION='5.2' bundle update
   ACTIVERECORD_VERSION='5.2' ENABLE_TRANSITIONS='true' bundle exec rake test
   ACTIVERECORD_VERSION='5.2' ENABLE_TRANSITIONS='false' bundle exec rake test
